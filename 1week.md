@@ -73,10 +73,10 @@ NN에서 hypthesis 하나를 정하기 위해서는 일반적으로 2가지를 �
 2. Architecture 내의 파라미터 값
 > 아키텍쳐가 주어지고 그 hypothesis안에서 서로 다른 모델들은 weight value , bias vector 등등의 paramter들이 어떻게 되어있는지의 차이 그러니 각 hypotehsis안에 infinitely many 하게 모델들이 들어있는것.. 그러니 모두 시도하기가 힘들어서 optimization 알고리즘을 쓰게되는것
 
-![](https://github.com/wnsghek31/datascienceclass/blob/master/dagnn.PNG)
+![](https://github.com/wnsghek31/NLPusingdeeplearning/blob/master/image/dagnn.PNG)
 
 
-![](https://github.com/wnsghek31/datascienceclass/blob/master/daglogistic.PNG)
+![](https://github.com/wnsghek31/NLPusingdeeplearning/blob/master/image/daglogistic.PNG)
 Logistic Regression을 도식화한것
 
 즉 가설집합(Hypothesis set)은 무수히 많고, 이 중에서 가설집합(Hypothesis set) 하나를 결정하는 것은 비순환 그래프(DAG)를 만드는 것이라고 볼 수 있습니다. 그리고 그래프를 만들고 나면 그 안에 많은 Hyperparameter들이 있는데 여기서 Hyperparameter 값들을 결정하는 것이 학습
@@ -141,12 +141,12 @@ joint distribution(두 개 이상의 확률 변수에 관계된 확률 분포)�
 
 **인공신경망 모델의 아웃풋이 조건부 확률 분포라고 한다면 이를 사용해서 비용함수를 정의 한다면, 모델이 출력한 조건부 확률분포(Conditional distribution)가 훈련 샘플의 확률분포와 최대한 같게 만드는 것입니다. 즉, 모든 훈련 샘플이 나올 확률을 최대화 하는 것**
 
-![](https://github.com/wnsghek31/datascienceclass/blob/master/MaximumLikelihoodEstimation.PNG)
+![](https://github.com/wnsghek31/NLPusingdeeplearning/blob/master/image/MaximumLikelihoodEstimation.PNG)
 
 이 관점에서는 DAG가 어떤 아키텍처였는지, 모델(pθ)이 어떻게 생겼는지, 무슨 계산을하는지에 대해서는 전혀 신경 쓸 필요가 없습니다. 그저 확률이 output인 순간. 확률분포가 나오는 순간?), 공식을 적용해서 loss function을 만들 수 있습니다.(classifier 건 regression 모델이건) 이를 **최대 우도 측정(Maximum Likelihood Estimator)**라고한다
 
 
-![](https://github.com/wnsghek31/datascienceclass/blob/master/lossfunc.PNG)
+![](https://github.com/wnsghek31/NLPusingdeeplearning/blob/master/image/lossfunc.PNG)
 
 최종적으로, 최대 우도 추정(Maximum Likelihood Estimator)은 모든 훈련 샘플이 나올 확률을 최대화하는 것이고, 우리의 목적은 Loss Fuction을 만들고 그것을 쵯최소화 하는것이기에 마이너스(-) 를 붙힘.
 
@@ -183,7 +183,7 @@ Loss function도 negative log probability를 계산하므로서 자동으로 나
 3. 2번 반복해서 궁극적으로 젤 작은애로 간다.
 
 
-![](https://github.com/wnsghek31/datascienceclass/blob/master/randomguid.PNG)
+![](https://github.com/wnsghek31/NLPusingdeeplearning/blob/master/image/randomguid.PNG)
 
 > 랜덤하게 처음 시작 하나 뽑아서하고 , 노이즈 막 넣고 10개정도 찾은다음에 가장 낮은애로 가고(1) , 노이즈를 막넣어서 또 가장 낮은애 하니까 이번엔 잘안되서 좀 올라가고 (2) , 막 계속 반복하는거 .. 궁극적으로 낮은데로 간다. 
 
@@ -202,4 +202,4 @@ Loss function도 negative log probability를 계산하므로서 자동으로 나
 3. 기울기를 가지고 방향을 결정하고 점을 학습률(Learning Rate) 만큼 이동시켜 비용을 낮춥니다.
 4. 최적의 비용이 나올 때까지 1~3을 반복합니다.
 
-![](https://github.com/wnsghek31/datascienceclass/blob/master/gradientdescent.PNG)
+![](https://github.com/wnsghek31/NLPusingdeeplearning/blob/master/image/gradientdescent.PNG)
