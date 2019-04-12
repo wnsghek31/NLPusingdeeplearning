@@ -20,19 +20,19 @@ Data-Driven Algorithm
 3. 머신러닝 모델이 이 문제를 풀 수 있도록 학습을 시킵니다. (알고리즘을 만드는?)
 
 
-#### supervised learning 하려면 필요한것들
+### supervised learning 하려면 필요한것들
 1. training example
 2. loss function
 3. validation and test example이 있고
 
-#### 결정해야할것들이 
+### 결정해야할것들이 
 1. hypotehsis sets (hypotehsis sets 안에있는 가설은 이문제를 풀기위한 알고리즘(모델?))
 2. optimization algorithm 
 
 hypothesis sets (H1 ... Hm) 을 결정해야하는데, 각각 hypothesis set 하나하나는 이 set 안에 모든 가능한 비슷한 모델들이 들어있는것
 > 예를들어 첫번째 hypothesis set 안에는 SVM , 두번째 hypothesis set 안에는 같은 SVM인데 kernel function을 다른걸 쓴고 , 세번쨰는 KNN 같이 계속... 다른것들로
 
-#### 모든 것을 준비하고 결정하면
+### 모든 것을 준비하고 결정하면
 
 **지도학습은 가설에 대하여 최적화 알고리즘을 사용해 가장 좋은 모델을 결정**
 
@@ -47,7 +47,7 @@ hypothesis sets (H1 ... Hm) 을 결정해야하는데, 각각 hypothesis set 하
 
 즉 supervised learning이 하는일은 위에가 주어지고 결정하면, 최적의 알고리즘을 찾아주는것
 
-#### training , validation  ,test set
+### training , validation  ,test set
 **초반에 시작할때 미리 trainig ,validation ,test set을 구분하는게 중요**
 data set을 6 : 2 : 2 를 가장 많이 쓰는데, 이렇게 나누는 방법을 Simple Validation 이라고 하고, k-Fold Validation 이나 Leave-One-Out Validation 방법도 있다.
 
@@ -55,17 +55,17 @@ data set을 6 : 2 : 2 를 가장 많이 쓰는데, 이렇게 나누는 방법을
 ## Hypothesis Set
 가설집합(Hypothesis set)은 매우 크고 많습니다. 머신러닝 접근 방법, 모델 구조, 하이퍼파라미터 등 요소를 하나씩 변화할 때마다 가설(Hypothesis) 하나가 세워지기 때문
 
-#### 어떤 방식의 머신러닝 접근 방법을 사용할 것인가?
+### 어떤 방식의 머신러닝 접근 방법을 사용할 것인가?
 * Classification: Support vector machines, Naive Bayes classifier, logistic regresstion …
 * Regresstion: Support vector regression, Linear regression, Gaussian process …
 
-#### Hyperparameter는 어떤 것을 사용할 것인가?
+### Hyperparameter는 어떤 것을 사용할 것인가?
 * SVM을 사용한다면 kernel function은 어떤것을 사용하는가?
 	* kernel func이 Gaussian kernel func이라면 거기서 Bandwith 사이즈는 어떻게 되는가?
 * Neural network이라고 한다면 Convolution과 Recurrent 중에 어떤 것을 사용할 것인가?
 	* Recurrent를 사용하면 unit 개수가 어떻게 되는가?
 
-#### Neural Net 에서의 Hypotehsis set 선택에서의 고려사항
+### Neural Net 에서의 Hypotehsis set 선택에서의 고려사항
 NN에서 hypthesis 하나를 정하기 위해서는 일반적으로 2가지를 정함
 
 1. Network Architecture 선택
@@ -100,16 +100,16 @@ Logistic Regression을 도식화한것
 이것들은 당연한 사실이지만 loss function이 이 것들로부터 define 하게됨
 
 
-#### joint probability
+### joint probability
 p(Y=ej , X=ei) : How likely would ej and ei happen together?
 
-#### conditional probability 
+### conditional probability 
 p(Y=ej | X=ei) : Given ei , how likely would ej happen?
 P(Y|X) = P(X,Y) / P(X)
 
-#### ==Margianl Probability==
+### ==Margianl Probability==
 
-#### ==Marginalization==
+### ==Marginalization==
 joint distribution(두 개 이상의 확률 변수에 관계된 확률 분포)이 주어졌을 때(두 개가 동시에 일어날 확률이 주어졌을 떄) variable 하나에 대해서 관심이 없는 상태
 > 예를들어 동전 두개를 던질때, 이 동전 두개가 독립적이지 않다고 하면
 	첫번째 동전이 어떻게 나오느냐에 따라서 , 두번째 동전이 head이냐 tail이냐가 바뀐다고 했을때.. 어느순간 보니 첫번째 동전은 아무 의미가없는것 같다. 만약 두번째 동전이 head가 나온것이 중요하다고 생각하면 , 두번재 동전이 head가 나온 case에 대해서 첫번째 동전의 case를 모두 더한다. 그럼 이것이 marginalize라는것.
@@ -120,7 +120,6 @@ joint distribution(두 개 이상의 확률 변수에 관계된 확률 분포)�
 모델을 학습시키기 위해서는 Optimization을 해야하고 , Optimization을 하기 위해서는 Loss Function을 정의해야함
 
 이 강의에서는 확률 분포(distribution)에 따라서 자연스럽게 Loss function을 결정하는 방법에 대해서 설명
-
 
 
 기존 지도학습은 input x 를 넣을때 output y가 어떤 값인지를 산출하는것이다. 하지만 좀만 다르게 생각해서, **input x를 넣을때 output y값이 y'일 확률을 구하는것으로 생각한다면 p(y=y'|x) 로 조건부확률**이다.
@@ -173,7 +172,7 @@ Loss function도 negative log probability를 계산하므로서 자동으로 나
 
 관건은 점을 어떻게 움직여야 하는지에 있다. 다음은 점을 움직이는 2가지 방법
 
-#### Local, Iterative Optimization: Random Guided Search
+### Local, Iterative Optimization: Random Guided Search
 **장점** : loss function , DAG 가 어떤것이든지 바로 쓸수있다
 **단점** : 단점은 차원이 작으면 잘 되지만 높은 차원을 가지게 되면 계산이 안된다고 하지만, 요즘음 클러스터(data)가 크면 다 된다. low dimension에서는 잘 되지만 , high dimension에서는 efficiency가 떨어짐
 
@@ -192,7 +191,7 @@ Loss function도 negative log probability를 계산하므로서 자동으로 나
 
 그래서 !! loss function 과 DAG에 있는 모든 computation node들이 continuous 하고 differentiable 하다면  (모두 완전히 까지는아니지만 almost 하면) 효율적인 방법이 있다
 
-#### Gradient-based optimization
+### Gradient-based optimization
 장점: Random Guided search 에 비해서 탐색영역은 작지만 확실한 방향은 정할 수 있습니다
 단점 : 학습률(Learning Rate)이 너무 크거나 작으면 최적의 값으로 못갈 수도 있습니다
 한점에서 loss function의 gradient가 뭔지 , 어느 방향으로 파라미터를 움직여야 값이 작아질지
