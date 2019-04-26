@@ -202,3 +202,69 @@ Loss function도 negative log probability를 계산하므로서 자동으로 나
 4. 최적의 비용이 나올 때까지 1~3을 반복합니다.
 
 ![](https://github.com/wnsghek31/NLPusingdeeplearning/blob/master/image/gradientdescent.PNG)
+
+
+
+## Gradient-Based Optimization
+
+### off-the-shelf Gradient-base optimization
+Loss function의 gradient를 계산하고 나면 Gradient-descent, L-BFGS, Conjugate gradient 등을 사용할수있따. 하지만 학습시 train set에 대한 전체 loss를 구해야하기에, 이것은 데이터셋이 크면 클수록 학습 시간도 오래걸린다. 그래서 실제로는 사용하기 힘들다.
+
+
+### Stochastic Gradient Descent
+SGD는 모든 데이터 셋에 대한 loss 를 구하고 합을 하는것이 아니라, 샘플의 일부분만 골라 gradient를 계산하고 paramter를 업데이트한다. 그러니 위의 방법보다 효율적
+
+1. train set에서 일부 샘플을 선택 (Mini-bath 선택)
+2. Mini-batch 의 gradient 계싼
+3. parameter 업데이트
+4. validation set을 가지고 loss를 계산 . 더이상 줄어들지 않으면 멈춤
+
+
+### Early Stopping
+요새는 데이터가 많아서 mini-batch로 트레이닝하다보면 전체 데이터를 다 돌기 전에 최적 성능이 나오는 경우가 있다. 성능이 일정해지는 지점에 진입하면 바로 학습을 멈추는데 (즉 이 지점이 “검증 비용”이 진전되는게 멈출때), 이걸 early stopping 
+**Practice에서는 꼭 사용하는 방식** 이고 다른 dropout 같은 regularization 방식을 사용할지 말지를 결정하는게 일반적이다
+위 과정에서 4번은 앞서배운 Model selection 단계라고 할수있따.
+이 과정에서는 Train set에서의 Loss를 구하는 것이 아니라 Validation set에서 Loss가 줄어들고 있는지 확인을 하게 됨
+보통 Train set의 크기가 크기 때문에 학습하는 중간마다 Validation set을 이용하여 확인하며, 더 이상 낮춰지지 않으면 학습을 중단합니다. 이것을 Early Stoppping 이라고 함
+>이걸 매번하는것은 computationaly efficient 하지않고 , validation set이 크면 안좋으니 가끔 천번에서 만번정도 업데이트 할때마다 한번씩 해주는게 standard이다. 
+
+
+### Adaptive Learning Rate
+Learning rate가 너무 작으면 local minimum으로 가고, 너무 크면 overshooting이 일어난다. 
+이런점을 보완해주는 Adam optimization, Adadelta optimization 등이 있따 (확률적 경사하강법은 학습률에 민감함으로 Adam나 Adadelta등이 있음.)
+
+
+
+## Summary
+
+1. How do we decide/design a hypothesis set?
+* Design a network architecture as a DAG
+* Parameter 
+2. How do we decide a loss function ?
+* 가장 간단하고 새로운 문제들이 생겼을때 바로바로 할수있는것은  NN이 distribution을 output 하는게하면 (input이 주어졌을때 특정 y값의 확률이 어떻게 되는지를 output ) 바로 Negative log probability를 써서 loss fucnction define 가능
+* 뉴럴넷 자체 분포를 최대한 데이터셋 분포와 가깝게 하는것
+3. How do we optimize the loss function ?
+* hypothesis set이 너무 크니까 gradient based optimization을 한다
+* 자세하게는 몰라도 잘 되더라 ( 걍 써 )
+
+back prooagation,  forward propagation, dag 라는 프레임웍을 사용해서 abstraction이 너무 잘되있어서 backend compute 이 복잡해도 상관안하고 만들수있다. 
+
+네트워크 구조를 인풋으로 활용하고 모델의 성능을 아웃풋으로 하여 지도 학습을 한다면 만들수 있지 않을까? => Meta learning
+
+
+
+1. 모델 아키텍쳐의 결정 방법 이론이 있나?
+* 이론적으로 볼때 gurantee 값을 알고잇는게 없다. 어떤 input output (심지어 distribution) 이 주어졌다고 해도 어떤 network architecture가 optimize한지는 잘 모른다.
+
+
+
+determisitc 이란 계산할때마다 계속 똑같은 값이 나오는것 (간단하게)
+> 만약 all example을 모두 계산해서 gradinet를 계산하면 몇번을 하든 똑같은 값이나올것이다 -> deterministic 
+
+stochastic 하다 라는 의미는 뭔가 노이즈가 중간에 껴있어서 계산을 할때마다 값이 달라지는것. 
+> stochastic gradient는 매번  training example 중에 조금만 랜덤하게 고르기 때문에 매번 계산할때마다 값이 바뀔것이다 -> stochastic
+
+
+
+==만약 bias 가 들어있는 training set이라면, 어떤 bias냐에 따라 다르지만.. medical data 같은거에서 (99.99% 는 정상인 데이터같은거면) 무작위로 뽑으면 cancer case가 거의없다. 그러므로 upsampling을 하게되는데 그럼 bias가 들어가는것. 그럼 bias 가 들어간걸 어덯게하느냐 ? -> montecarlo sampling (montecarlo method를 써서 expectation approximation을 한것. (montecarlo method가 아닌 importance method 같은걸 써도 무방) ) . 이 bias 된 distribution을 알고 unbias된 distribution을 대강 알면 보정을 해줄수있따. 그럼 SGD를 쓰면서 할수있따.==
+
